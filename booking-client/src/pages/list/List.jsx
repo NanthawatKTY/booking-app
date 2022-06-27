@@ -1,6 +1,6 @@
 import {React, useState} from 'react'
 import { useLocation } from 'react-router-dom'
-import { Header, Navbar } from '../../components'
+import { Header, Navbar, SearchItem } from '../../components'
 import {format} from 'date-fns'
 import './list.css'
 import { DateRange } from 'react-date-range'
@@ -67,7 +67,16 @@ const List = () => {
             </div>
             <button>Search</button>
           </div>
-          <div className="listResult"></div>
+          <div className="listResult">
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+          </div>
         </div>
       </div>
     </div>
