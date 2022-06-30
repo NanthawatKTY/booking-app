@@ -1,7 +1,7 @@
-import {React, useState} from 'react'
+import { React, useState } from 'react'
 import { Footer, Header, MailList, Navbar } from '../../components'
 import './hotel.css'
-import {GrLocation} from 'react-icons/gr'
+import { GrLocation } from 'react-icons/gr'
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa'
 import { MdFullscreenExit } from 'react-icons/md'
 
@@ -40,11 +40,11 @@ const Hotel = () => {
   const handleMove = (direction) => {
     let newSlideNumber
 
-    if(direction === "left"){
+    if (direction === "left") {
       //If it's 0, it's gonna be 5 and if it's not it's gonna be slideNumber - 1
-      newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1  
-    }else{
-      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1  
+      newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1
+    } else {
+      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1
     }
 
     setSlideNumber(newSlideNumber)
@@ -53,18 +53,18 @@ const Hotel = () => {
   return (
     <div>
       <Navbar />
-      <Header type="list"/>
+      <Header type="list" />
       <div className="hotelContainer">
         {open && <div className="slider">
-            <MdFullscreenExit className='close' onClick={() => setOpen(false)}/>
-            <FaArrowAltCircleLeft className='arrow'  onClick={() => handleMove("left")}/>
-            <div className="sliderWrapper">
-              <img src={photos[slideNumber].src} alt="" className="sliderImg" />
-            </div>
-            <FaArrowAltCircleRight className='arrow' onClick={() => handleMove("rights")}/>
+          <MdFullscreenExit className='close' onClick={() => setOpen(false)} />
+          <FaArrowAltCircleLeft className='arrow' onClick={() => handleMove("left")} />
+          <div className="sliderWrapper">
+            <img src={photos[slideNumber].src} alt="" className="sliderImg" />
+          </div>
+          <FaArrowAltCircleRight className='arrow' onClick={() => handleMove("rights")} />
         </div>}
         <div className="hotelWrapper">
-          <button className="bookNow">Reserve or Book Now!</button> 
+          <button className="bookNow">Reserve or Book Now!</button>
           <h1 className="hotelTitle">Grand Turrismo Hotel</h1>
           <div className="hotelAddress">
             <GrLocation className="hotelIcon" />
@@ -79,7 +79,7 @@ const Hotel = () => {
           <div className="hotelImages">
             {photos.map((photo, index) => (
               <div key={index} className="hotelImgWrapper">
-                <img onClick={() => handleOpen(index)} src={photo.src} alt="hotel" className='hotelImg'/>
+                <img onClick={() => handleOpen(index)} src={photo.src} alt="hotel" className='hotelImg' />
               </div>
             ))}
           </div>
@@ -87,18 +87,18 @@ const Hotel = () => {
             <div className="hotelDetailsText">
               <h1 className='hotelTitle'>X2 Vibe Pattaya Seaphere - SHA Extra Plus</h1>
               <p className='hotelDesc'>
-              This property is 3 minutes walk from the beach. X2 Vibe Pattaya Seaphere - SHA Extra Plus Residence is offering accommodation in Na Jomtien. 
-              All rooms boast a TV with cable channels and a private bathroom. The property has free WiFi.
-              The rooms at the hotel come with a seating area. X2 Vibe Pattaya Seaphere - SHA Extra Plus Residence offers some rooms that feature a balcony. All guest rooms will provide guests with a microwave.
-              Guests at the accommodation can enjoy a buffet breakfast. There is an on-site restaurant, which specialises in Asian cuisine.
-              X2 Vibe Pattaya Seaphere - SHA Extra Plus Residence offers a year-round outdoor pool.
-              The reception at the hotel can provide tips on the area.
-              Pattaya Central is 14 km from X2 Vibe Pattaya Seaphere - SHA Extra Plus Residence. The nearest airport is Utapao-Rayong-Pataya International Airport, 18 km from the accommodation.
-              X2 Vibe Pattaya Seaphere - SHA Extra Plus has been welcoming Booking.com guests since 30 Jun 2017.
+                This property is 3 minutes walk from the beach. X2 Vibe Pattaya Seaphere - SHA Extra Plus Residence is offering accommodation in Na Jomtien.
+                All rooms boast a TV with cable channels and a private bathroom. The property has free WiFi.
+                The rooms at the hotel come with a seating area. X2 Vibe Pattaya Seaphere - SHA Extra Plus Residence offers some rooms that feature a balcony. All guest rooms will provide guests with a microwave.
+                Guests at the accommodation can enjoy a buffet breakfast. There is an on-site restaurant, which specialises in Asian cuisine.
+                X2 Vibe Pattaya Seaphere - SHA Extra Plus Residence offers a year-round outdoor pool.
+                The reception at the hotel can provide tips on the area.
+                Pattaya Central is 14 km from X2 Vibe Pattaya Seaphere - SHA Extra Plus Residence. The nearest airport is Utapao-Rayong-Pataya International Airport, 18 km from the accommodation.
+                X2 Vibe Pattaya Seaphere - SHA Extra Plus has been welcoming Booking.com guests since 30 Jun 2017.
               </p>
             </div>
             <div className="hotelDetailsPrice">
-            <h3>Property highlights</h3>
+              <h3>Property highlights</h3>
               <span>
                 Located in the real heart of Krakow, this property has an
                 excellent location score of 9.8!
@@ -111,7 +111,7 @@ const Hotel = () => {
           </div>
         </div>
         <MailList />
-        <Footer/>
+        <Footer />
       </div>
     </div>
   )
