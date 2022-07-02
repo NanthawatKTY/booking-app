@@ -42,11 +42,23 @@ export const getHotel = async (req, res, next) => {
     }
 }
 
-export const getAllHotel = async (req, res, next) => {
+export const getAllHotels = async (req, res, next) => {
         
     try {
         const hotels = await Hotel.find()
         res.status(201).json(hotels)
+    } catch (error) {
+       next(error)
+    }
+}
+
+export const countByCity = async (req, res, next) => {
+    const cities = req.query.cities.split(',')    
+    try {
+        const list = await Promise.all(cities.map((city) => {
+            return Hotel.countDocuments({city: city})
+        }))
+        res.status(201).json(list)
     } catch (error) {
        next(error)
     }
