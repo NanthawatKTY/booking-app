@@ -6,6 +6,7 @@ import usersRoute from './routes/users.js';
 import hotelsRoute from './routes/hotels.js';
 import roomsRoute from './routes/rooms.js';
 import cookieParser from "cookie-parser";
+import cors from 'cors';
 
 const app = express()
 dotenv.config()
@@ -24,6 +25,7 @@ mongoose.connection.on('disConnected', () => {
 })
 
 //Middleware
+app.use(cors());
 app.use(cookieParser())
 //In api req u can use every body data
 app.use(express.json());
