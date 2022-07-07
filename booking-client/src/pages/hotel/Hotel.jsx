@@ -1,11 +1,14 @@
-import { React, useState } from 'react'
+import { React, useContext, useState } from 'react'
 import { Footer, Header, MailList, Navbar } from '../../components'
 import './hotel.css'
 import { GrLocation } from 'react-icons/gr'
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa'
 import { MdFullscreenExit } from 'react-icons/md'
 import useFetch from '../../hooks/useFetch'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate  } from 'react-router-dom'
+import { SearchContext } from '../../context/SearchContext'
+import Reserve from '../../components/reserve/Reserve'
+import { AuthContext } from '../../context/AuthContext'
 
 const Hotel = () => {
 
@@ -13,8 +16,25 @@ const Hotel = () => {
   const id = location.pathname.split('/')[2]
   const [slideNumber, setSlideNumber] = useState(0)
   const [open, setOpen] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
 
   const { data, loading, error } = useFetch(`/hotels/find/${id}`)
+  const {user} = useContext(AuthContext)
+  const navigate = useNavigate()
+
+  //Context api
+  const {dates, options} = useContext(SearchContext)
+
+  //Dates range calculation
+  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+  function dayDifference(date1, date2) {
+    // const timeDiff = Math.abs(Date.parse(date2) - Date.parse(date1));
+    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+    return diffDays;
+  }
+
+  const days = dayDifference(dates[0].endDate, dates[0].startDate)
 
   const handleOpen = (index) => {
     setSlideNumber(index)
@@ -32,6 +52,14 @@ const Hotel = () => {
     }
 
     setSlideNumber(newSlideNumber)
+  }
+
+  const handleClick = (index) => {
+      if (user) {
+        setOpenModal(true)
+      }else{
+        navigate("/login")
+      }
   }
 
   return (
@@ -84,15 +112,17 @@ const Hotel = () => {
                 excellent location score of 9.8!
               </span>
               <h2>
-                <b>$945</b> (9 nights)
+                <b>${days * data.cheapestPrice * options.room}</b> ({days} nights)
               </h2>
-              <button>Reserve or Book Now!</button>
+              <button onClick={handleClick}>Reserve or Book Now!</button>
             </div>
           </div>
         </div>
         <MailList />
         <Footer />
-      </div>)}
+      </div>
+      )}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>}
     </div>
   )
 }
